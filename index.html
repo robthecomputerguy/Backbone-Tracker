@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tracker</title>
+    <link href="vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#/">Issue Tracker</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="#projects">Projects</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" id="container">
+        <div id="header"></div>
+        <div id="content"></div>
+    </div>
+
+    
+
+    <script type="text/javascript" src="vendors/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="vendors/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="vendors/underscore.js"></script>
+    <script type="text/javascript" src="vendors/backbone.js"></script>
+
+
+    <script src="app/utils.js"></script>
+    <script src="app/models/issue.js"></script>
+    <script src="app/views/header.js"></script>
+    <script src="app/views/issuelist.js"></script>
+    <script src="app/views/issueview.js"></script>
+    <script src="app/router.js"></script>
+    
+  </body>
+</html>
