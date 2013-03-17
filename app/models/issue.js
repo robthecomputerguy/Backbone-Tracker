@@ -1,5 +1,5 @@
 window.Issue = Backbone.Model.extend({
-    urlRoot:"/tracker/application/issue",
+    urlRoot:"../application/issue",
     defaults:{
         "id":null,
         "title":"",
@@ -9,5 +9,5 @@ window.Issue = Backbone.Model.extend({
 
 window.IssueCollection = Backbone.Collection.extend({
     model:Issue,
-    url:"/tracker/application/issue"
+    url:"../application/issue"
 });
