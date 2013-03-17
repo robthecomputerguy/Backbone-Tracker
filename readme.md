@@ -2,7 +2,7 @@ Backbone.js Issue Tracker
 ==========================
 
 
-This is a bug/issue tracker written in Backbone.js, jQuery, underscore.js and Yii Framework as the backend.
+This is a bug/issue tracker written in Backbone.js, jQuery, Underscore.js, Bootstrap and Yii Framework as the backend.
 
 Project is under development and any contribution is welcomed and appricated.
 
