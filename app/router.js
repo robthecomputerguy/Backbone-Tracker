@@ -11,13 +11,12 @@ Backbone.View.prototype.close = function () {
 // Backbone Router
 var AppRouter = Backbone.Router.extend({
     initialize:function () {
-        
-
         $('#header').html(new HeaderView().render().el);
     },
 
     routes:{
         "issue/add":"addIssue",
+        "issue/edit/:id":"editIssue",
         "issue/:id":"viewIssue",
         "":"list",
     },
@@ -32,6 +31,14 @@ var AppRouter = Backbone.Router.extend({
         });
     },
 
+    editIssue:function (id) {
+        console.log('Edit Issue Route ' + id);
+        this.before(function () {
+            var issue = app.issueList.get(id);
+            app.showView('#content', new IssueEdit({model:issue}));
+        });
+    },
+
     viewIssue:function (id) {
         console.log('View Issue Route ' + id);
         this.before(function () {
@@ -43,7 +50,7 @@ var AppRouter = Backbone.Router.extend({
     addIssue:function () {
         console.log('Add Issue Route');
         this.before(function () {
-            app.showView('#content', new IssueView({model:new Issue()}));
+            app.showView('#content', new IssueEdit({model:new Issue()}));
         });
     },
 
@@ -74,7 +81,7 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
-tpl.loadTemplates(['header', 'issue-details', 'issue-item', 'issues-list'], function () {
+tpl.loadTemplates(['header', 'issue-details', 'issue-item', 'issues-list', 'issue-view'], function () {
     app = new AppRouter();
     Backbone.history.start();
 });
