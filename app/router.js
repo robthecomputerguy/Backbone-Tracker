@@ -27,6 +27,7 @@ var AppRouter = Backbone.Router.extend({
             this.issueList = new IssueCollection();
             this.issueListView = new IssueListView({model:this.issueList});
             this.issueList.fetch();
+            console.log('Issue List: ', this.issueList);
             app.showView('#content', new IssueListView({model:this.issueList}));
         });
     },
@@ -62,7 +63,15 @@ var AppRouter = Backbone.Router.extend({
         return view;
     },
 
+    refreshIssues: function() {
+        this.issueList = new IssueCollection();
+        this.issueListView = new IssueListView({model:this.issueList});
+    },
+
     before:function (callback) {
+        // Load Statuses
+        this.loadStatuses();
+
         if(!this.issueList) {
             this.issueList = new IssueCollection();
             this.issueListView = new IssueListView({model:this.issueList});
@@ -76,6 +85,14 @@ var AppRouter = Backbone.Router.extend({
             if(callback) {
                 callback();
             }
+        }
+    },
+
+    // load statuses
+    loadStatuses: function() {
+        if(!this.statusList) {
+            this.statusList = new StatusCollection();
+            this.statusList.fetch();
         }
     }
 

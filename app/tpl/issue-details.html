@@ -2,13 +2,24 @@
   <div class="control-group">
     <label class="control-label" for="title">Title</label>
     <div class="controls">
-      <input type="text" id="title" placeholder="Issue Title" value="<%= title %>" required>
+      <input type="text" id="title" placeholder="Issue Title" value="<%= issue.get('title') %>" required>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="description">Description</label>
     <div class="controls">
-      <textarea id="description" name="description"><%= description %></textarea>
+      <textarea id="description" name="description"><%= issue.get('description') %></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="status_id">Status</label>
+    <div class="controls">
+      <select id="status_id" name="status_id">
+        <option value='-- Select Status --'></option>
+        <% _.each(statuses.models, function(status) { %>
+          <option value='<%= status.get('id') %>' <% if(issue.get('status_id') == status.get('id')) { %>selected="selected"<% } %>><%= status.get('title') %></option>
+        <% }); %>
+      </select>
     </div>
   </div>
   <div class="control-group">

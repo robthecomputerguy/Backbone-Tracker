@@ -5,6 +5,7 @@ window.IssueListView = Backbone.View.extend({
         this.model.bind("add", function (issue) {
             $(self.el).append(new IssueListItemView({model:issue}).render().el);
         });
+        this.model.on('change', this.render, this);
     },
 
     render:function (eventName) {

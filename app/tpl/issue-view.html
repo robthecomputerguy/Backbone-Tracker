@@ -1,16 +1,19 @@
 <div class="control-group">
     <div class="controls">
-      <a href="#/issue/edit/<%= id %>" class="edit btn btn-primary">Edit</a>
+      <a href="#/issue/edit/<%= issue.get('id') %>" class="edit btn btn-primary">Edit</a>
       <button type="button" class="delete btn btn-danger">Delete</button>
     </div>
  </div>
 
 <table class="table table-bordered">
 	<tr>
-		<td>#<%= id %></td>
-		<td><%= title %></td>
+		<td>#<%= issue.get('id') %></td>
+		<td><%= issue.get('title') %></td>
+		<td>
+			<span class="label <%= issue.get('status').get('class') %>"><%= issue.get('status').get('title') %></span>
+		</td>
 	</tr>
 	<tr>
-		<td colspan="2"><%= description %></td>
+		<td colspan="3"><%= issue.get('description') %></td>
 	</tr>
 </table>

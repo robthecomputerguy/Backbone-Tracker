@@ -6,7 +6,8 @@ window.IssueEdit = Backbone.View.extend({
     },
 
     render:function (eventName) {
-        $(this.el).html(this.template(this.model.toJSON()));
+        console.log(this.model);
+        $(this.el).html(this.template({issue: this.model, statuses: app.statusList }));
         return this;
     },
 
@@ -27,13 +28,16 @@ window.IssueEdit = Backbone.View.extend({
     saveIssue:function () {
         this.model.set({
             title: $('#title').val(),
-            description: $('#description').val()
+            description: $('#description').val(),
+            status_id: $('#status_id').val()
         });
         if (this.model.isNew()) {
             var self = this;
             app.issueList.create(this.model, {
                 success:function (model, response) {
                     console.log('Issue Saved');
+                    // Refresh
+                    console.log(IssueListView);
                     app.navigate('/issue/' + self.model.id, true);
                 }, 
                 error: function(model, response) {

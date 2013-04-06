@@ -5,7 +5,7 @@ window.IssueView = Backbone.View.extend({
     },
 
     render:function (eventName) {
-        $(this.el).html(this.template(this.model.toJSON()));
+        $(this.el).html(this.template({issue: this.model, statuses: app.statusList }));
         return this;
     },
 
@@ -17,7 +17,7 @@ window.IssueView = Backbone.View.extend({
         this.model.destroy({
             success:function () {
                 alert('Issue deleted successfully');
-                window.history.back();
+                app.navigate('/', true);
             },
             error: function(model, response) {
                 alert(response.responseText);

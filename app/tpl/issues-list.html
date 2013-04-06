@@ -10,7 +10,14 @@
 		<% _.each(issues, function(issue) { %>
 	     <tr>
 	     	<td><%= issue.id %></td>
-	     	<td><a href='#/issue/<%= issue.id %>'><%- issue.get('title') %></a></td>
+	     	<td>
+	     		<% if(issue.get('status')) { %>
+	     		<span class="label <%= issue.get('status').get('class') %>"><%= issue.get('status').get('title') %></span>
+	     		<% } %>
+	     		<a href='#/issue/<%= issue.id %>'>
+	     			<%- issue.get('title') %>
+	     		</a>
+	     	</td>
 	     	<td><%- issue.get('description') %></td>
 	     	<td></td>
 	     </tr>

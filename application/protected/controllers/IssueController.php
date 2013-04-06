@@ -1,11 +1,15 @@
 <?php
 
-class IssueController extends CController
+class IssueController extends Controller
 {
 	public function actionList() {
 		// Get all issues
-		$issues = Issue::model()->findAll();
-		$this->send($issues);
+		$issues = Issue::model()->with(array('status'))->findAll();
+		$list = array();
+		foreach($issues as $r) {
+			$list[] = array_merge($r->attributes, array('status' => $r->status->attributes));
+		}
+		$this->send($list);
 	}
 
 	public function actionAdd() {
@@ -22,13 +26,16 @@ class IssueController extends CController
 			$this->sendError(implode("\n", $errors));
 		}
 
+		$issue = Issue::model()->with(array('status'))->findByPk($issue->id);
+		$item = array_merge($issue->attributes, array('status' => $issue->status->attributes));
+
 		// Success
-		$this->send($issue);
+		$this->send($item);
 	}
 
 	public function actionUpdate($id) {
 		// make sure we have that id
-		$issue = Issue::model()->findByPk($id);
+		$issue = Issue::model()->with(array('status'))->findByPk($id);
 		if(!$issue) {
 			$this->sendError("Sorry, That issue was not found.");
 		}
@@ -45,8 +52,11 @@ class IssueController extends CController
 			$this->sendError(implode("\n", $errors));
 		}
 
+		$issue = Issue::model()->with(array('status'))->findByPk($id);
+		$item = array_merge($issue->attributes, array('status' => $issue->status->attributes));
+
 		// Success
-		$this->send($issue);
+		$this->send($item);
 	}
 
 	public function actionDelete($id) {
@@ -59,25 +69,5 @@ class IssueController extends CController
 		$issue->delete();
 
 		$this->send("");
-		exit;
-	}
-
-	public function actionView() {
-		
-	}
-
-	protected function sendError($message) {
-		header('500 Internal Server Error');
-		echo $message;
-		exit;
-	}
-
-	protected function send($message) {
-		echo CJSON::encode($message);
-		exit;
-	}
-
-	protected function getJsonData() {
-		return json_decode(file_get_contents('php://input'), true);
 	}
 }
