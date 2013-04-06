@@ -37,8 +37,7 @@ window.IssueView = Backbone.View.extend({
             var self = this;
             app.issueList.create(this.model, {
                 success:function (model, response) {
-                    //app.navigate('issue/' + self.model.id, false);
-                    app.navigate('/', false);
+                    app.navigate('/issue/' + self.model.id, false);
                 }, 
                 error: function(model, response) {
                     alert(response.responseText);
